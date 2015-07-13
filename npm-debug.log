@@ -1,0 +1,82 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'link', 'sails' ]
+2 info using npm@1.4.16
+3 info using node@v0.10.26
+4 verbose node symlink /usr/bin/node
+5 verbose node_modules/sails unbuild
+6 info preuninstall sails@0.10.0
+7 info uninstall sails@0.10.0
+8 verbose true,/home/vvnab/etalon/node_modules,/home/vvnab/etalon/node_modules unbuild sails@0.10.0
+9 verbose /home/vvnab/etalon/node_modules/.bin,[object Object] binRoot
+10 info postuninstall sails@0.10.0
+11 verbose link symlinking /usr/lib/node_modules/sails to /home/vvnab/etalon/node_modules/sails
+12 info build /home/vvnab/etalon/node_modules/sails
+13 info preinstall sails@0.10.0-rc8
+14 verbose linkStuff [ false, false, false, '/home/vvnab/etalon/node_modules' ]
+15 info linkStuff sails@0.10.0-rc8
+16 verbose linkBins sails@0.10.0-rc8
+17 verbose link bins [ { sails: './bin/sails.js' },
+17 verbose link bins   '/home/vvnab/etalon/node_modules/.bin',
+17 verbose link bins   false ]
+18 verbose linkMans sails@0.10.0-rc8
+19 verbose rebuildBundles sails@0.10.0-rc8
+20 verbose rebuildBundles [ '.bin',
+20 verbose rebuildBundles   'anchor',
+20 verbose rebuildBundles   'async',
+20 verbose rebuildBundles   'captains-log',
+20 verbose rebuildBundles   'colors',
+20 verbose rebuildBundles   'commander',
+20 verbose rebuildBundles   'connect-flash',
+20 verbose rebuildBundles   'ejs',
+20 verbose rebuildBundles   'ejs-locals',
+20 verbose rebuildBundles   'express',
+20 verbose rebuildBundles   'express3-handlebars',
+20 verbose rebuildBundles   'glob',
+20 verbose rebuildBundles   'grunt',
+20 verbose rebuildBundles   'grunt-cli',
+20 verbose rebuildBundles   'grunt-contrib-clean',
+20 verbose rebuildBundles   'grunt-contrib-coffee',
+20 verbose rebuildBundles   'grunt-contrib-concat',
+20 verbose rebuildBundles   'grunt-contrib-copy',
+20 verbose rebuildBundles   'grunt-contrib-cssmin',
+20 verbose rebuildBundles   'grunt-contrib-jst',
+20 verbose rebuildBundles   'grunt-contrib-less',
+20 verbose rebuildBundles   'grunt-contrib-uglify',
+20 verbose rebuildBundles   'grunt-contrib-watch',
+20 verbose rebuildBundles   'grunt-sails-linker',
+20 verbose rebuildBundles   'grunt-sync',
+20 verbose rebuildBundles   'i18n',
+20 verbose rebuildBundles   'include-all',
+20 verbose rebuildBundles   'lodash',
+20 verbose rebuildBundles   'merge-defaults',
+20 verbose rebuildBundles   'mock-req',
+20 verbose rebuildBundles   'mock-res',
+20 verbose rebuildBundles   'node-uuid',
+20 verbose rebuildBundles   'pluralize',
+20 verbose rebuildBundles   'rc',
+20 verbose rebuildBundles   'reportback',
+20 verbose rebuildBundles   'sails-build-dictionary',
+20 verbose rebuildBundles   'sails-disk',
+20 verbose rebuildBundles   'sails-generate',
+20 verbose rebuildBundles   'sails-stringfile',
+20 verbose rebuildBundles   'sails-util',
+20 verbose rebuildBundles   'semver',
+20 verbose rebuildBundles   'skipper',
+20 verbose rebuildBundles   'socket.io',
+20 verbose rebuildBundles   'waterline' ]
+21 error Error: EPERM, chmod '/home/vvnab/etalon/node_modules/sails/bin/sails.js'
+21 error  { [Error: EPERM, chmod '/home/vvnab/etalon/node_modules/sails/bin/sails.js']
+21 error   errno: 50,
+21 error   code: 'EPERM',
+21 error   path: '/home/vvnab/etalon/node_modules/sails/bin/sails.js' }
+22 error Please try running this command again as root/Administrator.
+23 error System Linux 3.2.0-4-amd64
+24 error command "node" "/usr/bin/npm" "link" "sails"
+25 error cwd /home/vvnab/etalon
+26 error node -v v0.10.26
+27 error npm -v 1.4.16
+28 error path /home/vvnab/etalon/node_modules/sails/bin/sails.js
+29 error code EPERM
+30 error errno 50
+31 error stack Error: EPERM, chmod '/home/vvnab/etalon/node_modules/sails/bin/sails.js'
+32 verbose exit [ 50, true ]

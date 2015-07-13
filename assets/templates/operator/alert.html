@@ -1,0 +1,20 @@
+<div class='ui large modal' id='alert-form'>
+    <div class='header'>
+        Вы успешно записались на мойку!
+    </div>
+    <div class='content'>
+        <div class='ui inverted segment'>
+            <p>
+                Вы успешно записались на мойку "<%= app.washing.get(order.get('box').washing).get('name') %>"
+                <br/>
+                на <%= moment(order.get('datetime')).format('dddd DD MMMM в HH:mm') %>
+            </p>
+        </div>
+    </div>
+    <div class='actions'>
+        <div class='ui negative left labeled icon button'>
+            <i class='checkmark icon'></i>
+            Ok
+        </div>
+    </div>
+</div>

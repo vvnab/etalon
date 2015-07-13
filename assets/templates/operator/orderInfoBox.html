@@ -1,0 +1,11 @@
+<div class='ui segment'>
+    <small class='ui label'>
+        <%= moment(order.get('datetime')).format('DD.MM.YYYY HH:mm') %>
+    </small>
+    <p>
+        <span class='ui label black'><%= order.get('car') ? order.get('car').plateNumber : '' %></span> <%= order.get('carType') ? order.get('carType').name : '' %>
+    </p>
+    <p>
+        <%= order.get('user') ? order.get('user').fullName : '' %> <%= order.get('user') ? order.get('user').phone : '' %>
+    </p>
+</div>

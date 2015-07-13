@@ -1,0 +1,64 @@
+<!-- Default home page -->
+<div style='background: #333'>
+    <div class='ui page grid'>
+        <nav class='ui inverted menu'>
+            <!--a class='item' href='#'>
+                <i class='home icon'></i>
+                Главная
+            </a-->
+            <div class='ui dropdown item'>
+                <i class='icon home'></i>
+                <div class='menu'>
+                    <a class='item' href='/admin'>
+                        Администратор
+                    </a>
+                    <a class='item' href='/operator'>
+                        Оператор
+                    </a>
+                </div>
+            </div>
+            <div class='ui dropdown item'>
+                <i class='reorder icon'></i>
+                Справочники
+                <i class='dropdown icon'></i>
+                <div class='menu'>
+                    <a class='item' href='#!/user'>
+                        <i class='users icon'></i>
+                        Пользователи
+                    </a>
+                    <a class='item'  href='#!/car'>
+                        <i class='keyboard icon'></i>
+                        Машины клиентов
+                    </a>
+                    <a class='item' href='#!/washing'>
+                        <i class='home icon'></i>
+                        Мойки
+                    </a>
+                    <a class='item' href='#!/box'>
+                        <i class='stop icon'></i>
+                        Боксы
+                    </a>
+                    <a class='item'  href='#!/carType'>
+                        <i class='truck icon'></i>
+                        Типы автомобилей
+                    </a>
+                    <a class='item' href='#!/service'>
+                        <i class='cart icon'></i>
+                        Услуги
+                    </a>
+                    <a class='item' href='#!/thesaurus'>
+                        <i class='list icon'></i>
+                        Общий справочник
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div id='main-page'>
+</div>
+
+<script src='/js/libs/require.js' data-main='/js/apps/admin'></script>
+
+

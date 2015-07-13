@@ -1,0 +1,107 @@
+<div class='ui page grid <%= dateChange ? "transition hidden" : "" %>' style='padding-bottom: 80px' id='data-sheet'>
+    <div class='column'>
+        <table class='washing-table'>
+            <thead>
+                <tr>
+                    <% washing.each(function(washing){ %>
+                    <th colspan='<%= box.filter(function(el){ return el.get("washing").id == washing.id}).length %>'>
+                        <%= washing.get('name') %>
+                    </th>
+                    <% }) %>
+                </tr>
+                <tr>
+                <% washing.each(function(washing, k){ %>
+                    <% _.each(box.filter(function(el){return el.get("washing").id == washing.id}), function(box){ %>
+                    <td class='box-th box-color-<%= k %>'>
+                        <%= box.get('name') %>
+                    </td>
+                    <% }) %>
+                <% }) %>
+                </tr>
+            </thead>
+        </table>
+        <table class='washing-table'>
+            <tbody>
+                <%
+                    var schedules = washing.map(function(el){
+                        return el.get('schedule');
+                    });
+                %>
+                <% for(var i = 0; i < (app.daysPerPage || 2); i++){
+                    var weekday = date.day() - 1 + i;
+                    if (weekday > 6) {
+                        weekday = 7 - weekday;
+                    } else if (weekday < 0) {
+                        weekday = 7 + weekday;
+                    }
+                    var minHour = _.reduce(schedules, function(res, item, k){
+                        return item[weekday].bgn < res || !res ? item[weekday].bgn : res;
+                    }, null);
+                    var maxHour = _.reduce(schedules, function(res, item, k){
+                        return item[weekday].end > res || !res ? item[weekday].end : res;
+                    }, null); %>
+                    <tr>
+                        <td colspan='<%= box.length %>'>
+                            <div class='date-title'>
+                                <%= moment(date).add(i, 'days').format('dddd DD MMMM YYYY') %> г.
+                            </div>
+                        </td>
+                    </tr>
+                    <% for(var k = minHour; k <= maxHour; k++){ %>
+                    <tr class='hour-tr'>
+                    <% washing.each(function(washing, j){ %>
+                        <% _.each(box.filter(function(el){ return el.get('washing').id == washing.id}), function(box, l){ %>
+                        <% if (washing.get("schedule")[weekday].end >= k && washing.get("schedule")[weekday].bgn <= k && moment(date).add(i, "days").add(k + 0.5, "hours") >= moment() ){ %>
+                            <td data-box='<%= box.id %>' data-day='<%= moment(date).add(i, "days").toJSON() %>' data-hour='<%= k %>' data-content='<%= moment(date).add(i, "days").format("dd DD.MM.YY") + " " + k + ":00" %>' class='box-td box-color-<%= j %>'>
+                        <% } else { %>
+                            <td class='noop'>
+                        <% } %>
+                            <% if (j == 0 && l == 0) { %>
+                            <div class='hour-title'>
+                                <%= k + ':00' %>
+                            </div>
+                            <% } %>
+                            <div class='order-container'>
+                                <% _([1,2]).each(function(part){ %>
+                                <div class='order-container-2' data-offset='<%= 60 - 60 / part %>'  id='<%= "{0}-{1}-{2}".format(box.id, moment(date).add(i, "days").add(k, "hours").unix(), part) %>'>
+                                </div>
+                                <% }) %>
+                            </div>
+                        </td>
+                        <% }) %>
+                    <% }) %>
+                    </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+        <div class='ui segment inverted' style='float: left'>
+            <ul>
+                <li>
+                    <span class='order-box-hint order-class-1'></span> - запись
+                </li>
+                <li>
+                    <span class='order-box-hint order-class-3'></span> - клиент не явился
+                </li>
+                <li>
+                    <span class='order-box-hint order-class-4'></span> - выполняется
+                </li>
+                <li>
+                    <span class='order-box-hint order-class-5'></span> - выполнен
+                </li>
+            </ul>
+        </div>
+
+        <div style='float: left; margin-left: 10px; margin-top: 10px;' id='order-info-box'>
+        </div>
+
+    </div>
+</div>
+<div class='footer collection'>
+    <br/>
+    <div class='ui page grid bottom'>
+        <div class='column center aligned'>
+            &copy; <%= new Date().getFullYear() %> <div id='psilobora'></div> Psilobora&trade;
+        </div>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+<h5 class='ui header <%= el.id ? "green" : "blue" %>'>
+<% if (el.id) { %>
+    Редактирование:
+    <div class="sub header">
+        <!-- <%= el.get(model.name) %> -->
+    </div>
+<% } else { %>
+    <%= form.titleNew %>
+    <div class="sub header">
+    </div>
+<% } %>
+</h5>
+
+<div class='ui horizontal icon divider'>
+    <i class='asterisk icon'></i>
+</div>
+    
+<div class='ui form'>
+    <% _.each(form.fields, function(i, k){ 
+        switch(i.type) {
+            case 'text': %>
+                <div class='field'>
+                    <div class='ui <%= i.widget %>'>
+                        <input type='text' autocomplete='off' name='<%= k %>' placeholder='<%= i.title %>' value='<%= i.value ? i.value(el) : el.get(k) %>' <%= i.disabled ? "disabled" : "" %>/>
+                        <i class='icon <%= i.icon %>'></i>
+                        <% if(i.requried) { %>
+                        <div class='ui corner label'>
+                            <i class='icon asterisk'></i>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% break;
+            case 'img': %>
+                <div class='field'>
+                    <% if (el.url) { %>
+                        <a class='ui <%= i.widget %>' href='<%= el.get("url") %>' target='_blank'>
+                            <img style='height: 150px' src='<%= el.get("img") || "http://cars.mail.ru/img/default/nofoto__catalog-model_sedan-240.png" %>'/>
+                        </a>
+                    <% } else { %>
+                        <img class='ui <%= i.widget %>' src='<%= el.get("img") %>'/>
+                    <% } %>
+                </div>
+                <% break;
+            case 'json': %>
+                <div class='field'>
+                    <div class='ui <%= i.widget %>'>
+                        <input type='text' autocomplete='off' name='<%= k %>' placeholder='<%= i.title %>' value='<%= JSON.stringify(el.get(k)) %>'/>
+                        <i class='icon <%= i.icon %>'></i>
+                        <% if(i.requried) { %>
+                        <div class='ui corner label'>
+                            <i class='icon asterisk'></i>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% break;
+            case 'textArea': %>
+                <div class='field'>
+                    <div class='ui <%= i.widget %>'>
+                        <textarea name='<%= k %>'><%= JSON.stringify(el.get(k), space = 2)%></textarea>
+                        <% if(i.requried) { %>
+                        <div class='ui corner label'>
+                            <i class='icon asterisk'></i>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% break;
+            case 'bool': %>
+                <div class='ui form segment <%= i.addClass ? i.addClass(el) : "" %>'>
+                    <div class='inline field'>
+                        <div class='ui <%= i.widget %>'>
+                            <input type='checkbox' name='<%= k %>' <%= el.get(k) ? 'checked' : '' %>/> 
+                            <label><%= i.title %></label>
+                        </div>
+                    </div>
+                </div>
+                <% break;
+            case 'multiselect': %>
+                <div class='ui form segment <%= i.addClass ? i.addClass(el) : "" %>'>
+                    <div class='field'>
+                        <label><b><%= i.title %>:</b></label>
+                    </div>
+                    <% if (_.isArray(i.source)) { 
+                        _.each(i.source, function(item){ %>
+                        <div class='inline field'>
+                            <div class='ui <%= i.widget %>'>
+                                <input type='checkbox' name='<%= k %>' value='<%= item.value %>' <%= _.contains(el.get(k), item.value) ? 'checked' : '' %>/> 
+                                <label><%= item.name %></label>
+                            </div>
+                        </div>
+                        <% });
+                    } else if (_.isObject(i.source)) {
+                        var collection = app[i.source.model];
+                        if (collection.fetched) {
+                            collection.each(function(item){
+                            %>
+                                <div class='inline field'>
+                                    <div class='ui <%= i.widget %>'>
+                                        <input type='checkbox' name='<%= k %>' value='<%= item.id %>' <%= _.contains(el.get(k), item.id) ? 'checked' : '' %>/> 
+                                        <label><%= item.get(i.source.name) %></label>
+                                    </div>
+                                </div>
+                            <%
+                            });
+                        } else {
+                            collection.fetch({
+                                success: function(){
+                                    collection.fetched = true;
+                                    app.view.render();
+                                }
+                            })
+                        }
+                    } %>
+                </div>
+                <% break;
+            case 'select': %>
+                <div class='ui form segment <%= i.addClass ? i.addClass(el) : "" %>'>
+                    <div class='field'>
+                        <label><b><%= i.title %>:</b></label>
+                    </div>
+                    <% if (_.isArray(i.source)) { 
+                        _.each(i.source, function(item){ %>
+                        <div class='inline field'>
+                            <div class='ui <%= i.widget %>'>
+                                <input type='checkbox' name='<%= k %>' value='<%= item.value %>' <%= el.get(k) == item.value ? 'checked' : '' %>/> 
+                                <label><%= item.name %></label>
+                            </div>
+                        </div>
+                        <% });
+                    } else if (_.isObject(i.source)) {
+                        var collection = app[i.source.model];
+                        if (collection.fetched) {
+                            collection = i.source.filter ? collection.where(i.source.filter) : collection.toArray();
+                            _.each(collection, function(item){
+                            %>
+                                <div class='inline field'>
+                                    <div class='ui <%= i.widget %>'>
+                                        <input type='radio' name='<%= k %>' value='<%= item.id %>' <%= (_.isObject(el.get(k)) ?  el.get(k).id : el.get(k)) == item.id ? 'checked' : '' %>/> 
+                                        <label><%= item.get(i.source.name) %></label>
+                                    </div>
+                                </div>
+                            <%
+                            });
+                        } else {
+                            collection.fetch({
+                                success: function(){
+                                    collection.fetched = true;
+                                    app.view.render();
+                                }
+                            })
+                        }
+                    } %>
+                </div>
+                <% break;
+        }
+    }) %>
+    
+    <div class='ui horizontal icon divider'>
+        <i class='save icon'></i>
+    </div>
+
+    <div class='ui small buttons'>
+        <div class='ui submit green button' id='model-save'>
+            Сохранить
+        </div>
+        <% if (el.id) { %>
+        <div class='or'></div>
+        <a href='#!/<%= model %>/add' class='ui blue button'>
+            Создать
+        </a>
+        <div class='or'></div>
+        <div class='ui red button' id='model-remove'>
+            Удалить
+        </div>
+        <% } %>
+    </div>
+
+</div>

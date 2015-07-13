@@ -1,0 +1,24 @@
+<div class='ui vertical pointing menu' style='width: 100%'>
+    <% collection.each(function(el){ %>
+        <a href='#!/<%= collection.name %>/<%= el.id %>' class='item <% if (id == el.id) print("active") %>'>
+            <!--i class='edit icon'></i-->
+            <%= _.isFunction(title) ? title(el) : el.get(title) %>
+        </a>
+    <% }) %>
+</div>
+
+<% if (collection.pagination.skip != 0 || collection.length == collection.pagination.limit) { %>
+<center>
+    <div class='ui pagination menu'>
+        <a class='item <%= collection.pagination.skip == 0 ? "disabled" : "" %>' id='page-previous'>
+            <i class='left arrow icon'></i> Назад
+        </a>
+        <div class='item'>
+            <i class='file outline icon'></i><%= collection.pagination.skip / collection.pagination.limit + 1 %>
+        </div>
+        <a class='item <%= collection.length < collection.pagination.limit ? "disabled" : "" %>' id='page-next'>
+            Вперёд <i class='right arrow icon'></i>
+        </a>
+    </div>
+</center>
+<% } %>

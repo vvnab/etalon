@@ -1,0 +1,257 @@
+/**
+ * importer.less
+ *
+ * By default, new Sails projects are configured to compile this file
+ * from LESS to CSS.  Unlike CSS files, LESS files are not compiled and
+ * included automatically unless they are imported below.
+ *
+ * The LESS files imported below are compiled and included in the order
+ * they are listed.  Mixins, variables, etc. should be imported first
+ * so that they can be accessed by subsequent LESS stylesheets.
+ *
+ * (Just like the rest of the asset pipeline bundled in Sails, you can
+ * always omit, customize, or replace this behavior with SASS, SCSS,
+ * or any other Grunt tasks you like.)
+ */
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100%;
+  font-family: Tahoma;
+}
+.ui.menu.main {
+  border-radius: 0;
+}
+.footer {
+  background-color: #00a1d2;
+  color: #ffffff;
+  position: absolute;
+  width: 100%;
+}
+.footer.collection {
+  bottom: 0;
+  position: fixed;
+  z-index: 999;
+}
+.footer.main {
+  top: 420px;
+  left: 0;
+  bottom: 0;
+  min-height: 400px;
+}
+.footer.main .bottom {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+}
+.footer.main a.ui.icon {
+  color: inherit;
+  text-decoration: none;
+}
+.footer.main a.ui.icon .sub.header {
+  margin-top: 5px;
+  color: white;
+  opacity: 0.7;
+}
+.footer.main a.ui.icon .icon:hover {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+#collection-page {
+  margin-bottom: 100px;
+}
+#psilobora {
+  height: 32px;
+  width: 32px;
+  background: url('/images/psilobora.png');
+  display: inline-block;
+  margin: -6px 10px 0;
+}
+.ui.menu .filter-item {
+  width: 20%;
+}
+.hidden {
+  display: none;
+}
+table.washing-table {
+  width: 100%;
+  table-layout: fixed;
+}
+table.washing-table thead th {
+  text-align: center !important;
+  padding-bottom: 10px;
+}
+table.washing-table thead td.box-th {
+  height: 30px;
+  color: white;
+  text-align: center;
+  font-size: 12pt;
+  font-weight: bold;
+}
+table.washing-table thead td.box-th.box-color-0 {
+  background: #d56c6c;
+}
+table.washing-table thead td.box-th.box-color-1 {
+  background: #6666c9;
+}
+table.washing-table thead td.box-th.box-color-2 {
+  background: #67cc67;
+}
+table.washing-table tbody td.box-td.box-color-0 {
+  background: #f7e3e3;
+}
+table.washing-table tbody td.box-td.box-color-1 {
+  background: #d7d7f1;
+}
+table.washing-table tbody td.box-td.box-color-2 {
+  background: #daf2da;
+}
+table.washing-table tbody .date-title {
+  text-align: center;
+  font-size: 12pt;
+  font-weight: bold;
+}
+table.washing-table tbody .hour-title {
+  height: 20px;
+  width: 90px;
+  text-align: right;
+  margin-left: -95px;
+  font-size: 9pt;
+  float: left;
+}
+table.washing-table tbody .hour-tr {
+  height: 20px;
+  background: #f1f1f1;
+}
+table.washing-table tbody .hour-tr .noop {
+  cursor: not-allowed;
+}
+table.washing-table tbody .order-container .order-container-2 {
+  height: 20px;
+  width: 50%;
+  float: left;
+}
+table.washing-table tbody .order-box {
+  height: 16px;
+  margin: 2px;
+  background: red;
+  outline: 1px solid white;
+  cursor: pointer;
+  color: white;
+  line-height: 10pt;
+  text-align: center;
+  text-transform: lowercase;
+}
+table.washing-table tbody .order-box.order-class-2 {
+  background: transparent;
+}
+table.washing-table tbody .order-box.order-class-3 {
+  background: gray;
+}
+table.washing-table tbody .order-box.order-class-4 {
+  background: orange;
+}
+table.washing-table tbody .order-box.order-class-5 {
+  background: green;
+}
+table.washing-table tbody .order-box:nth-child(2) {
+  animation: blink 0.5s linear infinite;
+  -webkit-animation: blink 0.5s linear infinite;
+  outline: 1px solid orange;
+}
+table.washing-table tbody .order-box:nth-child(3) {
+  animation: blink 0.5s linear infinite;
+  -webkit-animation: blink 0.5s linear infinite;
+  outline: 1px solid orange;
+}
+dl {
+  font: 10pt Tahoma;
+  line-height: 140%;
+}
+dl dt {
+  text-align: right;
+  width: 160px;
+  float: left;
+  clear: left;
+}
+dl dt:after {
+  content: ':';
+}
+dl dd {
+  margin-left: 180px;
+}
+.twitter-typeahead {
+  width: 100%;
+}
+.twitter-typeahead .typeahead {
+  padding-left: 3em !important;
+  padding-right: 1.2em!important;
+}
+.twitter-typeahead .tt-dropdown-menu {
+  background: white;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+.twitter-typeahead .tt-suggestion {
+  padding: 3px 20px;
+  cursor: pointer;
+}
+.twitter-typeahead .tt-cursor {
+  color: #fff;
+  background-color: black;
+}
+.order-box-hint {
+  height: 16px;
+  background: red;
+  outline: 1px solid white;
+  vertical-align: bottom;
+  width: 30px;
+  display: inline-block;
+}
+.order-box-hint.order-class-2 {
+  background: transparent;
+}
+.order-box-hint.order-class-3 {
+  background: gray;
+}
+.order-box-hint.order-class-4 {
+  background: orange;
+}
+.order-box-hint.order-class-5 {
+  background: green;
+}
+.order-box-hint:nth-child(2) {
+  animation: blink 0.5s linear infinite;
+  -webkit-animation: blink 0.5s linear infinite;
+  outline: 1px solid orange;
+}
+.order-box-hint:nth-child(3) {
+  animation: blink 0.5s linear infinite;
+  -webkit-animation: blink 0.5s linear infinite;
+  outline: 1px solid orange;
+}

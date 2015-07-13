@@ -1,0 +1,42 @@
+<!-- Default home page -->
+<div style='background: #333'>
+    <div class='ui page grid'>
+        <nav class='ui inverted menu'>
+            <div id='calendar-menu' class='right menu'></div>
+            <!--a class='item' href='#'>
+                <i class='home icon'></i>
+                Главная
+            </a-->
+            <div class='ui dropdown item'>
+                <i class='home icon'></i>
+                <div class='menu'>
+                    <a class='item' href='/admin'>
+                        Администратор
+                    </a>
+                    <a class='item' href='/operator'>
+                        Оператор
+                    </a>
+                </div>
+            </div>
+            <div class='ui dropdown item'>
+                <i class='users icon'></i>
+                Оператор
+                <i class='dropdown icon'></i>
+                <div class='menu' id='operator-choice'>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div id='main-page'>
+    <div class="ui active dimmer">
+        <div class="ui large text loader">
+            Загрузка справочников
+        </div>
+    </div>
+  </div>
+
+<script src='/js/libs/require.js' data-main='/js/apps/operator'></script>
+
+

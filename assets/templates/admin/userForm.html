@@ -1,0 +1,92 @@
+<h4 class='ui header <%= el.id ? "teal" : "green" %>'>
+<% if (el.id) { %>
+    Редактирование:
+    <div class="sub header">
+        <%= el.get('fullName') %>
+    </div>
+<% } else { %>
+    Создание нового пользователя
+    <div class="sub header">
+        
+    </div>
+<% } %>
+</h4>
+
+<div class='ui divider'></div>
+    
+<div class='ui form'>
+    <div class='field'>
+        <!--label>E-Mail:</label-->
+        <div class='ui labeled left icon input'>
+            <input type='text' name='fullName' placeholder='Ф.И.О.' value='<%= el.get("fullName") %>'/>
+            <i class='user icon'></i>
+            <div class='ui corner label'>
+                <i class='icon asterisk'></i>
+            </div>
+        </div>
+    </div>
+    <div class='field'>
+        <!--label>Телефон:</label-->
+        <div class='ui labeled left icon input'>
+            <input type='text' name='phone' placeholder='Телефон' value='<%= el.get("phone") %>'/>
+            <i class='phone icon'></i>
+            <div class='ui corner label'>
+                <i class='icon asterisk'></i>
+            </div>
+        </div>
+    </div>
+    <div class='field'>
+        <!--label>E-Mail:</label-->
+        <div class='ui labeled left icon input'>
+            <input type='text' name='email' placeholder='E-Mail' value='<%= el.get("email") %>'/>
+            <i class='mail icon'></i>
+            <div class='ui corner label'>
+                <i class='icon asterisk'></i>
+            </div>
+        </div>
+    </div>
+    <div class='field'>
+        <label> <b>Роли:</b></label>
+    </div>
+    <div class='ui form segment'>
+        <div class='inline field'>
+            <div class='ui checkbox'>
+                <input type='checkbox' name='group' value='admin' <%= _.contains(el.get('groups'), 'admin') ? 'checked' : '' %>/>
+                <label>Администратор</label>
+            </div>
+        </div>
+        <div class='inline field'>
+            <div class='ui checkbox'>
+                <input type='checkbox' name='group' value='operator' <%= _.contains(el.get('groups'), 'operator') ? 'checked' : '' %>/>
+                <label> Оператор</label>
+            </div>
+        </div>
+    </div>
+    
+    <div id='washings-field' class='<%= !_.contains(el.get("groups"), "operator") ? "hidden" : ""%>'>
+        <div class='field'>
+            <label><b>Мойки:</b></label>
+        </div>
+        <div class='ui form segment'>
+            <% app.washing.each(function(washing){ %>
+            <div class='inline field'>
+                <div class='ui toggle checkbox'>
+                    <input type='checkbox' name='washing' value='<%= washing.id %>' <%= _.contains(el.get('washings'), washing.id) ? 'checked' : '' %>/> 
+                    <label><%= washing.get('name') %> <small>(<%= washing.get('addr') %>)</small> </label>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    
+    <div class='ui divider'></div>
+        <div class='ui small buttons'>
+            <div class='ui green button'>
+                Сохранить
+            </div>
+            <div class='or'></div>
+            <a href='#!/user/add' class='ui blue button'>
+                Создать нового
+            </a>
+        </div>
+</div>

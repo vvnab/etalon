@@ -1,0 +1,66 @@
+<div class='ui menu'>
+    <div class='item'>
+        <i class='<%= _.isEmpty(filters) ? "blue" : "red" %> filter large icon'></i>
+    </div>
+    <% _.each(form.filters, function(i, k) {
+        switch(i.type) { 
+            case 'text': %>
+            <div class='item filter-item'>
+                <div class='ui icon input'>
+                    <input value='<%= filters[k] ? filters[k].contains : "" %>' type='text' data-filter-type='contains' placeholder='<%= i.title %>' name='<%= k %>' autocomplete='off'/>
+                    <i class='<%= i.icon %> icon'></i>
+                </div>
+            </div>
+                <% break;
+            case 'choice': %>
+            <div class='ui dropdown item'>
+                <input type='hidden' name='<%= k %>' data-filter-type='equal' value='<%= filters[k] %>'/>
+                <div class='default text'>
+                    <%= i.title %>
+                </div>
+                <i class='dropdown icon'></i>
+                <div class='menu'>
+                    <% if (_.isArray(i.source)) {
+                        _.each(i.source, function(item){ %>
+                            <div class='item' data-value='<%= item.value %>'>
+                                <%= item.name %>
+                            </div>
+                    <% })} else if (_.isObject(i.source)) {
+                        var collection = app[i.source.model];
+                        if (collection.fetched) {
+                            collection = i.source.filter ? collection.where(i.source.filter) : collection.toArray();
+                            _.each(collection, function(item){
+                            %>
+                            <div class='item' data-value='<%= item.id %>'>
+                                <%= item.get(i.source.name) %>
+                            </div>
+                            <% });
+                        } else {
+                            collection.fetch({
+                                success: function(){
+                                    collection.fetched = true;
+                                    app.view.render();
+                                }
+                            })
+                        }
+                    } %>
+                </div>
+            </div>
+                <% break;
+        }
+    }) %>
+        
+    <div class='right menu'>
+        <div class='item'>
+            <div class='ui icon button basic <%= _.isEmpty(filters) ? "disabled" : "" %>' id='filter-clear'>
+                Сбросить
+                <i class='icon off'></i>
+            </div>
+            <!--div class='ui icon button basic' id='filter-set'>
+                Применить
+                <i class='icon filter'></i>
+            </div-->
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,313 @@
+{
+  "data": {
+    "box": [],
+    "car": [],
+    "cartype": [],
+    "client": [],
+    "order": [],
+    "service": [],
+    "thesaurus": [],
+    "user": [],
+    "washing": []
+  },
+  "schema": {
+    "box": {
+      "name": {
+        "type": "string"
+      },
+      "washing": {
+        "type": "string"
+      },
+      "fastMode": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "car": {
+      "name": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "cartype": {
+      "name": {
+        "type": "string"
+      },
+      "class": {
+        "type": "json"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "client": {
+      "name": {
+        "type": "string"
+      },
+      "user": {
+        "type": "string"
+      },
+      "car": {
+        "type": "string"
+      },
+      "plateNumber": {
+        "type": "string"
+      },
+      "status": {
+        "type": "integer",
+        "defaultsTo": 0
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "order": {
+      "datetime": {
+        "type": "datetime"
+      },
+      "operator": {
+        "type": "string"
+      },
+      "client": {
+        "type": "string"
+      },
+      "box": {
+        "type": "string"
+      },
+      "services": {
+        "type": "array"
+      },
+      "state": {
+        "type": "json",
+        "defaultsTo": {
+          "type": "orderState",
+          "id": "539c6071a835bd0f442ef66b"
+        }
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "service": {
+      "name": {
+        "type": "string"
+      },
+      "class": {
+        "type": "json"
+      },
+      "cost": {
+        "type": "integer"
+      },
+      "duration": {
+        "type": "integer"
+      },
+      "durationFast": {
+        "type": "integer"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "thesaurus": {
+      "type": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "value": {
+        "type": "json",
+        "defaultsTo": {}
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "user": {
+      "name": {
+        "type": "string",
+        "unique": true
+      },
+      "email": {
+        "type": "string"
+      },
+      "addr": {
+        "type": "string"
+      },
+      "phone": {
+        "type": "string"
+      },
+      "passwd": {
+        "type": "string"
+      },
+      "fullName": {
+        "type": "string"
+      },
+      "groups": {
+        "type": "array",
+        "defaultsTo": []
+      },
+      "washings": {
+        "type": "array",
+        "defaultsTo": []
+      },
+      "enb": {
+        "type": "boolean"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "washing": {
+      "name": {
+        "type": "string"
+      },
+      "addr": {
+        "type": "string"
+      },
+      "location": {
+        "type": "array",
+        "defaultsTo": [
+          0,
+          0
+        ]
+      },
+      "phone": {
+        "type": "string"
+      },
+      "schedule": {
+        "type": "json"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    }
+  },
+  "counters": {
+    "box": {},
+    "car": {},
+    "cartype": {},
+    "client": {},
+    "order": {},
+    "service": {},
+    "thesaurus": {},
+    "user": {},
+    "washing": {}
+  }
+}

@@ -1,0 +1,125 @@
+<div class='ui large modal' id='order-form'>
+    <div class='header'>
+        <%= app.order.id ? "Редактирование заказа" : "Заведение заказа" %>
+    </div>
+    <div class='content'>
+        <div class='ui form'>
+            <div class='two fields'>
+                <div class='field'>
+                    <div class='ui left labeled icon input'>
+                        <input name='washing' type='text' autocomplete='off' placeholder='Место' disabled value='<%= box.get("washing").name + ", бокс: " + box.get("name") %>'/>
+                        <i class='icon home'></i>
+                    </div>
+                </div>
+                <div class='field'>
+                    <div class='ui left labeled icon input'>
+                        <input name='datetime' type='text' autocomplete='off' placeholder='Время' value='<%= datetime.format("DD.MM.YYYY HH:mm") %>'/>
+                        <i class='icon time'></i>
+                    </div>
+                </div>
+            </div>
+            <div class='fields'>
+                <div class='eleven wide field'>
+                    <div class='ui left labeled icon input'>
+                        <input <%= app.order.id ? "disabled" : "" %> class='typeahead' name='user' type='text' value='<%= app.order.id ? app.order.get("user").fullName : "" %>' autocomplete='off' placeholder='Ф.И.О. клиента'/>
+                        <i class='icon user'></i>
+                    </div>
+                </div>
+                <div class='five wide field'>
+                    <div class='ui left labeled icon input'>
+                        <input <%= app.order.id ? "disabled" : "" %> class='typeahead' name='phone' type='text' value='<%= app.order.id ? app.order.get("user").phone : "" %>' autocomplete='off' placeholder='телефон'/>
+                        <i class='icon phone'></i>
+                    </div>
+                </div>
+            </div>
+            <div class='fields'>
+                <div class='seven wide field'>
+                    <div class='ui left labeled icon input'>
+                        <input <%= app.order.id ? "disabled" : "" %> class='typeahead' name='carType' type='text' value='<%= app.order.id ? app.carType.get(app.order.get("car").carType).get("name") : "" %>' autocomplete='off' placeholder='Модель автомобиля'/>
+                        <i class='icon truck'></i>
+                    </div>
+                </div>
+                <div class='three wide field'>
+                    <div class='ui left labeled icon input'>
+                        <input <%= app.order.id ? "disabled" : "" %> name='number' type='text' value='<%= app.order.id ? app.order.get("car").plateNumber.replace(/^\d+ /, '') : "" %>' autocomplete='off' placeholder='Гос. номер' autofocus/>
+                        <i class='icon keyboard'></i>
+                    </div>
+                </div>
+                <div class='two wide field'>
+                    <div class='ui right input'>
+                        <input <%= app.order.id ? "disabled" : "" %> name='region' type='text' value='11' autocomplete='off'/>
+                        
+                    </div>
+                </div>
+                <div class='four wide field'>
+                    <div class='ui selection dropdown'>
+                        <input type='hidden' name='service' value='<%= app.order.id ? app.thesaurus.find(function(el){return _.isEqual(el.get("value"), app.order.get("serviceSet"))}).get("name") : "" %>'/>
+                        <div class='default text'>Тип мойки</div>
+                        <i class='dropdown icon'></i>
+                        <div class='menu'>
+                            <% _.each(app.thesaurus.where({type: 'serviceType'}), function(el){ %>
+                            <div class='item' data-value='<%= el.id %>'><%= el.get("name") %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='ui inverted segment'>
+            <% if (app.order.id){ %>
+            <div class='fields' style='float:right'>
+                <div class='field'>
+                    <div class='ui selection dropdown'>
+                        <input type='hidden' name='state' value='<%= app.order.getStateId() %>'/>
+                        <div class='default text'>Статус заказа</div>
+                        <i class='dropdown icon'></i>
+                        <div class='menu'>
+                            <% _.each(app.thesaurus.where({type: 'orderState'}), function(el){ %>
+                            <div class='item' data-value='<%= el.id %>'><%= el.get("name") %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <dl>
+                <dt>Место</dt>
+                <dd>
+                    <span id='order-washing'>
+                        <%= box.get('washing').addr %>
+                    </span>
+                </dd>
+                <dt>Время</dt>
+                <dd>
+                    <span id='order-datetime'>
+                        <%= datetime.format("DD.MM.YYYY HH:mm") %>
+                    </span>
+                </dd>
+                <dt>Услуга</dt>
+                <dd>
+                    <span id='order-service'> <%= app.order.id ? app.thesaurus.find(function(el){return _.isEqual(el.get("value"), app.order.get("serviceSet"))}).get("name") : "--" %> </span>
+                </dd>
+                <dt>Стоимость</dt>
+                <dd>
+                    <span id='order-cost'> <%= app.order.id ? app.order.getCost() : "--" %> </span> руб.
+                </dd>
+                <dt>Время выполнения</dt>
+                <dd>
+                    <span id='order-duration'> <%= app.order.id ? app.order.getDuration() : "--" %>  </span> мин.
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class='actions'>
+        <div class='two fluid ui buttons'>
+            <div class='ui negative left labeled icon button'>
+                <i class='remove icon'></i>
+                <%= app.order.id ? 'Выйти' : 'Отмена' %> 
+            </div>
+            <div class='ui positive right labeled icon button'>
+                Сохранить
+                <i class='checkmark icon'></i>
+            </div>
+        </div>
+    </div>
+</div>
